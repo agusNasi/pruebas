@@ -1,0 +1,11 @@
+.containerCounter{
+    display: flex;
+    align-items: center;
+    margin: 0 0 20px 0;
+}
+
+
+label {
+    padding: 0 2rem;
+    font-size: 2rem;
+}
