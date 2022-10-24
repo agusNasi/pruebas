@@ -15,6 +15,18 @@ export const ItemDetail = ({ data }) => {
 
     }
 
+    const BtnItemDetail = () => {
+        return (
+            <>
+                <div>
+                    <Link className="btn btn-outline-dark finish" to='/cart'>Terminar Compra</Link>
+                    <Link className="btn btn-dark" to='/productos'>Seguir comprando</Link>
+                </div>
+            </>
+
+        );
+
+    }
 
     return (
         <>
@@ -27,10 +39,8 @@ export const ItemDetail = ({ data }) => {
                 <h3 className="display-6 fw-bold my-4">$ {data.price}</h3>
                 <p className="lead">{data.description}</p>
                 {
-                    goToCart ? <Link to='/cart'>Terminar Compra</Link> : <ItemCount initial={1} stock={5} onAdd={onAdd} />
+                    goToCart ? <BtnItemDetail /> : <ItemCount initial={1} stock={data.stock} onAdd={onAdd} />
                 }
-                <button className="btn btn-outline-dark px-4 py-2">Agregar al carrito</button>
-                <Link to="/cart" className="btn btn-dark ms-2 px-3 py-2">Ir al carrito</Link>
             </div>
         </>
     );

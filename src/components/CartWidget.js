@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const CartWidget = () => {
 
-	const { totalProducts } = useCartContext();
+	const { totalProducts, cart } = useCartContext();
 
 
 	return (
@@ -16,3 +16,4 @@ const CartWidget = () => {
 };
 
 export default CartWidget;
+

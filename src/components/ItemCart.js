@@ -1,21 +1,30 @@
 import React from 'react';
 import { useCartContext } from '../context/CartContext';
+import '../assets/css/ItemCart.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
-export const ItemCart = ({ product }) => {
+export const ItemCart = ({ product}) => {
 
 
-    const { removeProduct } = useCartContext();
+    const { removeProduct} = useCartContext();
+
 
     return (
-        <div className='itemCart'>
-            <img src={product.image} alt={product.title} />
-            <div>
-                <p>Título: {product.title}</p>
-                <p>Cantidad: {product.quantity}</p>
-                <p>Precio u.: {product.price}</p>
-                <p>Subtotal: ${product.quantity * product.price}</p>
-                <button onClick={() => removeProduct(product.id)}>Eliminar</button>
+        <>
+            <div className='container-item__cart'>
+                <div className='col-md-2'>
+                    <img className='image-itemCart' src={product.image} alt={product.title} />
+                </div>
+                <div className='item-cart-mid col-md-6'>
+                    <p>{product.title}</p>
+                    <p>({product.quantity})</p>
+                    <p>${product.price}</p>
+                </div>
+                <div className='col-md-2 item-cart-right'>
+                    <i className="bi bi-trash-fill remove-item" onClick={() => removeProduct(product.id)}></i>
+                    <p className='subtotal'>Subtotal: ${product.quantity * product.price}</p>
+                </div>
             </div>
-        </div>
+        </>
     )
 }

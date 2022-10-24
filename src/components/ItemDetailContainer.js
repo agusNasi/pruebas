@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from "react";
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { ItemDetail } from "./ItemDetail";
 import { useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 export const ItemDetailContainer = () => {
 
-    const {id} = useParams();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const {detalleid} = useParams();
 
 
     useEffect(() => {
-        const getProduct = async () => {
-            setLoading(true);
-            const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-            setData(response.json());
-            setLoading(false);
-        }
-        getProduct()
-    }, []);
+        setLoading(true);
+        const querydb = getFirestore();
+        const queryDoc = doc(querydb, 'products', detalleid);
+        getDoc(queryDoc)
+        .then(res => setData({id: res.id, ...res.data() }))
+        setTimeout(() => {
+            setLoading(false)
+        }, 2000);
+    }, [detalleid]);
+
+
 
     const Loading = () => {
         return (
@@ -44,6 +48,7 @@ export const ItemDetailContainer = () => {
         return(
             <>
                 <ItemDetail data={data} />
+
             </>
         );
     }

@@ -1,6 +1,8 @@
 import React from "react";
 import CartWidget from "./CartWidget";
 import { NavLink } from "react-router-dom";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 export const NavBar = () => {
     return (
@@ -27,12 +29,9 @@ export const NavBar = () => {
                             </li>
                         </ul>
                         <div className="buttons">
-                            <NavLink to="/login" className="btn btn-outline-dark"><i className="fa fa-sign-in me-1"></i> Iniciar Sesion</NavLink>
-                            <NavLink to="/register" className="btn btn-outline-dark ms-2"><i className="fa fa-user-plus me-1"></i> Registrarse</NavLink>
-                            <NavLink to='cart'>
-                                <CartWidget />
-                            </NavLink>
-
+                            <NavLink to="/login" className="btn btn-outline-dark"><i className="bi bi-person-circle"></i> Iniciar Sesion</NavLink>
+                            <NavLink to="/register" className="btn btn-outline-dark ms-2"><i className="bi bi-box-arrow-in-right"></i> Registrarse</NavLink>
+                            <CartWidget />
                         </div>
                     </div>
                 </div>
@@ -40,3 +39,4 @@ export const NavBar = () => {
         </div>
     );
 }
+

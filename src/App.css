@@ -3,3 +3,52 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.navbar-nav a {
+  font-size: 18px;
+}
+
+
+.finish{
+  margin-right: 1em;
+}
+
+.cart-title{
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.totalPriceCart{
+  font-size: 2em;
+  text-align: right;
+  margin-right: 80px;
+}
+
+.hr{
+  margin: 0 4em 0 4em;
+}
+
+.btn-buy{
+  margin-top: 1em;
+}
+
+.container-btnBuy {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.form-container{
+  margin-top: 20px;
+}
+
+.formBuy {
+  width: 50%;
+}
+
+.container-btn__buy {
+  display: flex;
+  justify-content: flex-end;
+  
+}
