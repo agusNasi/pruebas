@@ -1,6 +1,5 @@
-import { addDoc, collection, getFirestore, doc, getDocs } from "firebase/firestore";
+import { addDoc, collection, getFirestore, docs, getDoc, getDocs, doc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
 
 
@@ -21,6 +20,7 @@ export const FormBuy = ({ levantarEstado }) => {
     }
 
     const [user, setUser] = useState(valorInicial);
+    const [lista, setLista] = useState({});
     const [estadoHijo, setEstadoHijo] = useState(true);
 
 
@@ -36,17 +36,42 @@ export const FormBuy = ({ levantarEstado }) => {
             await addDoc(collection(db, 'orders'), {
                 ...user, finalCart, total: totalPrice()
             })
-                .then(({ id }) => console.log(id))
+
         } catch (error) {
             console.log(error);
         }
+
+
         setUser({ ...valorInicial })
+
     }
+
+
+
+    useEffect(() => {
+        const getLista = async() => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'orders'));
+                const docs =[]
+                querySnapshot.forEach((doc) => {
+                    docs.push({...doc.data(), id: doc.id})
+                })
+
+                setLista(docs)
+
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getLista()
+    }, [lista])
+    
 
 
     return (
         <>
-            <form onSubmit={guardarDatos} className='formBuy'>
+            <form className='formBuy' onSubmit={guardarDatos}>
                 <div className="card card-body">
                     <div className="form-group">
                         <input type='text' name='nombre' className="form-control mb-3" placeholder="Nombre"
@@ -64,6 +89,8 @@ export const FormBuy = ({ levantarEstado }) => {
                     </button>
                 </div>
             </form>
+
+
         </>
     );
 }
