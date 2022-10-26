@@ -8,7 +8,7 @@ export const ItemCart = ({ product}) => {
 
     const { removeProduct} = useCartContext();
 
-
+    
     return (
         <>
             <div className='container-item__cart'>

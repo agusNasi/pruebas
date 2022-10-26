@@ -44,11 +44,51 @@
 }
 
 .formBuy {
-  width: 50%;
+  margin: 2em;
+  display: flex;
+ flex-direction: column;
+ align-items: center;
 }
 
 .container-btn__buy {
   display: flex;
   justify-content: flex-end;
   
+}
+
+.container-comprado {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.h1__comprado {
+  margin: 2em;
+}
+
+.btn__comprado{
+  margin-bottom: 5em;
+}
+
+.container__comprado{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title__comprado{
+  margin: 2em;
+}
+
+.container__noItems{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title__noItems{
+  margin: 2em;
 }

@@ -40,6 +40,8 @@ export const CartProvider = ({ children }) => {
     }
 
     const removeProduct = (id) => setCart(cart.filter(product => product.id !== id));
+
+    const emptyCart = () => cart.splice(0, cart.length);
  
 
     return(
@@ -50,6 +52,7 @@ export const CartProvider = ({ children }) => {
             addProduct,
             totalPrice,
             totalProducts,
+            emptyCart,
             cart
         }}>
             {children}
