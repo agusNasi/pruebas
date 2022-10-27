@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useCartContext } from "../context/CartContext";
 
 
-export const FormBuy = ({ levantarEstado }) => {
+export const FormBuy = ({ levantarEstado, userBuyer, pruebaId }) => {
 
 
     const db = getFirestore();
@@ -20,8 +20,8 @@ export const FormBuy = ({ levantarEstado }) => {
     }
 
     const [user, setUser] = useState(valorInicial);
-    const [lista, setLista] = useState({});
     const [estadoHijo, setEstadoHijo] = useState(true);
+
 
 
     const capturarInputs = (e) => {
@@ -32,11 +32,12 @@ export const FormBuy = ({ levantarEstado }) => {
     const guardarDatos = async (e) => {
         e.preventDefault();
         levantarEstado(estadoHijo);
+        userBuyer(user);
         try {
             await addDoc(collection(db, 'orders'), {
                 ...user, finalCart, total: totalPrice()
             })
-
+            .then(({id}) => pruebaId(id))
         } catch (error) {
             console.log(error);
         }
@@ -45,28 +46,6 @@ export const FormBuy = ({ levantarEstado }) => {
         setUser({ ...valorInicial })
 
     }
-
-
-
-    useEffect(() => {
-        const getLista = async() => {
-            try {
-                const querySnapshot = await getDocs(collection(db, 'orders'));
-                const docs =[]
-                querySnapshot.forEach((doc) => {
-                    docs.push({...doc.data(), id: doc.id})
-                })
-
-                setLista(docs)
-
-
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        getLista()
-    }, [lista])
-    
 
 
     return (

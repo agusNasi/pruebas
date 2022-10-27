@@ -8,12 +8,24 @@ import { FormBuy } from './FormBuy';
 export const Cart = () => {
 	const { cart, totalPrice, emptyCart } = useCartContext();
 	const [estadoPadre, setEstadoPadre] = useState();
+	const [comprador, setComprador] = useState();
+	const [idBuyer, setIdBuyer] = useState();
 
 	const levantarEstado = (estadoHijo) => {
 		setEstadoPadre(estadoHijo)
 	}
 
+	const userBuyer = (compradorUser) => {
+		setComprador(compradorUser)
+	}
+
+	const pruebaId = (idCompra) => {
+		setIdBuyer(idCompra)
+	}
+
+
 	const EstadoPadreTrue = () => {
+
 
 		const SiItems = () => {
 			return (
@@ -24,7 +36,7 @@ export const Cart = () => {
 					))}
 					<p className='totalPriceCart'>total: ${totalPrice()}</p>
 					<hr className='hr' />
-					<FormBuy levantarEstado={levantarEstado} />
+					<FormBuy levantarEstado={levantarEstado} userBuyer={userBuyer} pruebaId={pruebaId}/>
 				</>
 			);
 		}
@@ -41,7 +53,6 @@ export const Cart = () => {
 		}
 
 
-
 		return (
 			<>
 				{cart.length === 0 ? <NoItems /> : <SiItems />}
@@ -54,10 +65,14 @@ export const Cart = () => {
 
 
 		emptyCart();
+
 		return (
 			<>
 				<div className="container__comprado">
-					<h2 className="title__comprado">Gracias por su compra!</h2>
+					<h2 className="title__comprado">Gracias por su compra {comprador.nombre} !</h2>
+					<h4 className="subtitle__comprado">Te enviaremos todos los detalles de la compra al mail "{comprador.email}"</h4>
+					<h6 className="text__comprado">El id de su compra es: {idBuyer}.</h6>
+
 					<Link to="/" className="btn btn-dark">Volver al inicio</Link>
 				</div>
 			</>
